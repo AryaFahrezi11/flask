@@ -1,24 +1,24 @@
 {%extends 'layouts/base.html'%}
 
 {%block title%}add product {%endblock%}
-{%block content%} 
+{%block content%}
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}   
-        {% for category, message in messages %}
-           <script>
-                Swal.fire({
-                    position: "top-center",
-                    icon: "success",
-                    title: "{{ message }}",
-                    showConfirmButton: false,
-                    timer: 1000
-                });
-           </script>
-        {% endfor %}
-    {% endif %}
+{% if messages %}
+{% for category, message in messages %}
+<script>
+    Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: "{{ message }}",
+        showConfirmButton: false,
+        timer: 1000
+    });
+</script>
+{% endfor %}
+{% endif %}
 {% endwith %}
 
 <section>
@@ -43,38 +43,46 @@
         <div class="row">
             <div class="col">
                 <!-- TABLE PRODUCT -->
-                {% include 'layouts/component/list-product.html'%}    
-                            
+                {% include 'layouts/component/list-product.html'%}
+
                 <!-- MODAL POP UP -->
-                <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Produk</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                             </div>
                             <form action="/save-product" method="post">
                                 <div class="modal-body">
                                     <div class="mb-3">
                                         <label class="mb-2" for="form-label">Nama Produk</label>
-                                        <input type="text" name="name_product" class="form-control " placeholder="Masukan Nama Produk">
+                                        <input type="text" name="name_product" class="form-control "
+                                            placeholder="Masukan Nama Produk">
                                     </div>
                                     <div class="mb-3">
                                         <label class="mb-2" for="form-label">Link Gambar</label>
-                                        <input type="text" name="image_url" class="form-control" placeholder="Masukan Link Gambar">
+                                        <input type="text" name="image_url" class="form-control"
+                                            placeholder="Masukan Link Gambar">
                                     </div>
                                     <div class="mb-3">
                                         <label class="mb-2" for="form-label">Harga</label>
-                                        <input type="number" name="price" class="form-control" placeholder="Masukan Harga">
+                                        <input type="number" name="price" class="form-control"
+                                            placeholder="Masukan Harga">
                                     </div>
                                     <div class="mb-3">
                                         <label class="mb-2" for="form-label">Kategori</label>
                                         <select name="category" class="form-control">
-                                            <option selected>-- Pilih Kategori --</option>
-                                            {% for kategori in kategori%}
-                                            <option value="{{ kategori[0] }}">{{ kategori[1] }}</option>
+                                            <option selected value="0">-- Pilih Kategori --</option>
+                                            {% for kategori in kategori %}
+                                            <option value="{{ kategori.id_category }}">{{ kategori.name_category }}
+                                            </option>
                                             {% endfor %}
                                         </select>
+
+
                                     </div>
                                     <div class="mb-3">
                                         <label class="mb-2" for="form-label">Stok</label>
@@ -86,11 +94,13 @@
                                     </div>
                                     <div class="mb-3">
                                         <label class="mb-2" for="form-label">Deskripsi</label>
-                                        <input type="text" name="deskripsi" class="form-control" placeholder="Masukan Deskripsi">
+                                        <input type="text" name="deskripsi" class="form-control"
+                                            placeholder="Masukan Deskripsi">
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Batal</button>
                                     <div id="liveAlertPlaceholder"></div>
                                     <button type="submit" class="btn btn-dark" id="liveAlertBtn">Simpan</button>
                                 </div>
@@ -102,4 +112,4 @@
         </div>
     </div>
 </section>
-{%endblock%} 
+{%endblock%}

@@ -7,45 +7,51 @@
             <div class="col">
                 <h2>Edit Produk</h2>
                 <hr style="color: dark;">
-                <form action="/update-product/{{produk[0]}}" method="post">
+                <form action="/update-product/{{ produk.id }}" method="post">
                     <div class="mb-3">
                         <label for="formGroupExampleInput" class="form-label">Nama Produk</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" value="{{produk[1]}}" name="name_product" placeholder="Masukan Nama Produk">
+                        <input type="text" class="form-control" id="formGroupExampleInput"
+                            value="{{ produk.name_product }}" name="name_product" placeholder="Masukan Nama Produk">
                     </div>
                     <div class="mb-3">
                         <label for="formGroupExampleInput2" class="form-label">Link Gambar</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput2" value="{{produk[2]}}" name="image_url" placeholder="Masukan link gambar">
+                        <input type="text" class="form-control" id="formGroupExampleInput2"
+                            value="{{ produk.image_url }}" name="image_url" placeholder="Masukan link gambar">
                     </div>
                     <div class="mb-3">
                         <label for="formGroupExampleInput2" class="form-label">Harga</label>
-                        <input type="number" class="form-control" id="formGroupExampleInput2" value="{{produk[3]}}" name="price" placeholder="Masukan link gambar">
+                        <input type="number" class="form-control" id="formGroupExampleInput2" value="{{ produk.price }}"
+                            name="price" placeholder="Masukan Harga">
                     </div>
                     <div class="row">
                         <div class="col-12 col-md-6 mb-3">
                             <label for="formGroupExampleInput2" class="form-label">Kategori</label>
                             <select name="category" class="form-control">
-                                <option selected>{{ produk[4] }}</option>
-                                {% for kategori in kategori%}
-                                <option value="{{ kategori[0] }}">{{ kategori[1] }}</option>
+                                {% for kat in kategori %}
+                                <option value="{{ kat.id_category }}" {% if kat.id_category==produk.category
+                                    %}selected{% endif %}>
+                                    {{ kat.name_category }}
+                                </option>
                                 {% endfor %}
                             </select>
                         </div>
                         <div class="col-12 col-md-6 mb-3">
                             <label for="formGroupExampleInput2" class="form-label">Stok</label>
                             <select name="in_stok" class="form-control">
-                                <option selected>{{ produk[5] }}</option>
-                                <option value="1">Tersedia</option>
-                                <option value="0">Tidak Tersedia</option>
+                                <option value="1" {% if produk.in_stok==1 %}selected{% endif %}>Tersedia</option>
+                                <option value="0" {% if produk.in_stok==0 %}selected{% endif %}>Tidak Tersedia</option>
                             </select>
                         </div>
                         <div class="col-12 mb-3">
                             <label for="formGroupExampleInput2" class="form-label">Deskripsi</label>
-                            <input type="text" class="form-control" id="formGroupExampleInput2" value="{{produk[6]}}" name="deskripsi" placeholder="Masukan Deskripsi">
+                            <input type="text" class="form-control" id="formGroupExampleInput2"
+                                value="{{ produk.deskripsi }}" name="deskripsi" placeholder="Masukan Deskripsi">
                         </div>
                     </div>
                     <a class="btn btn-secondary" href="/add-product" role="button">Kembali</a>
                     <button class="btn btn-primary" type="submit">Save</button>
                 </form>
+
             </div>
         </div>
     </div>

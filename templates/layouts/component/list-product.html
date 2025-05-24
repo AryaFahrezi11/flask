@@ -15,14 +15,14 @@
                 <tbody>
                     {% for produk in produk %}
                     <tr>
-                        <td>{{ produk[1] }}</td>
-                        <td><img src="{{produk[2]}}" alt="" width="50px"></td>
-                        <td>Rp.{{ produk[3] | rupiah }}</td>
-                        <td>{{ produk[7] }}</td>
-                        <td>{{ 'Tersedia' if produk[5] == True else 'Tidak tersedia'}}</td>
+                        <td>{{ produk.name_product }}</td>
+                        <td><img src="{{produk. image_url}}" alt="" width="50px"></td>
+                        <td>Rp.{{ produk.price | rupiah }}</td>
+                        <td>{{ produk.name_category }}</td>
+                        <td>{{ 'Tersedia' if produk.in_stok == True else 'Tidak tersedia'}}</td>
                         <td>
-                            <a href="/edit-product/{{ produk[0] }}" class="btn btn-warning m-1">Edit</a>
-                            <a href="/delete-product/{{ produk[0] }}" class="btn btn-danger m-1 delete-button"> Delete</a>
+                            <a href="/edit-product/{{ produk.id }}" class="btn btn-warning m-1">Edit</a>
+                            <a href="/delete-product/{{ produk.id }}" class="btn btn-danger m-1 delete-button"> Delete</a>
                         </td>
                     </tr>
                     {% endfor %}

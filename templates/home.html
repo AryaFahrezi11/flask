@@ -1,53 +1,61 @@
 {% extends 'layouts/base.html' %}
-{% block title%} Nic Furniture {% endblock %}
+{% block title %} Nic Furniture {% endblock %}
 {% block content %}
 
-<!-- SHORT DECRIPRION -->
-<section>
-    <div class="container" style="margin-top: 150px;">
-        <div class="row g-4">
-            <div class="col-12 col-md-7 d-flex align-items-center">
-                <div class="p-2 w-100">
-                    <div class="title mt-4">
-                        <h1>Selamat Datang Di, Nic Furniture</h1>
-                        <h3>Wujudkan Rumah Impian Anda Dengan Kualitas Terbaik</h3>  
-                    </div> 
-                </div> 
+<!-- CAROUSEL -->
+<section id="carouselSection">
+    <div id="awardCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% for i in range(4) %}
+            <div class="carousel-item {% if loop.first %}active{% endif %}">
+                <img src="/static/image/misi.png" class="d-block w-100" alt="Slide {{ i + 1 }}">
             </div>
-            <div class="col-12 col-md-5">
-                <div class="p-2">
-                    <div class="text-end">
-                        <img src="/static/image/misi.png" class="rounded" alt="background hp" width="95%">
-                    </div> 
-                </div>
-            </div>
+            {% endfor %}
         </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#awardCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#awardCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
     </div>
 </section>
 
+<style>
+#carouselSection {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+.carousel-item img {
+    object-fit: cover;
+    height: 100vh;
+}
+</style>
 
-<!--  CARD PRODUCT PREVIEW -->
+<!-- CARD PRODUK -->
 <section>
     <div class="container" style="margin-top: 100px;">        
         <div class="row">
             <h2 class="text-center">Temukan Produk Terbaik Kami</h2>
             <hr class="mb-3" style="color: dark;">
             {% for produk in produk[:8] %}
-            <div class="col-8 col-md-3">
-                <div class="card shadow p-3 mb-5 bg-body-dark rounded" style="width: 100%;">
-                    <img src="{{ produk[2] }}" class="card-img-top" alt="" width="50px">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ produk[1] }}</h5>
-                        <p class="card-text">Rp.{{ produk[3] | rupiah }}</p>
-                        <a href="/detail-produk/{{ produk[0] }}" class="btn btn-outline-dark d-flex justify-content-center">Lihat Detail</a>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                <div class="card shadow p-3 mb-5 bg-body-dark rounded h-100">
+                    <img src="{{ produk.image_url }}" class="card-img-top" alt="{{ produk.name_product }}" style="height: 200px; object-fit: cover;">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ produk.name_product }}</h5>
+                        <p class="card-text">Rp.{{ produk.price | rupiah }}</p>
+                        <a href="/detail-produk/{{ produk.id }}" class="btn btn-outline-dark mt-auto">Lihat Detail</a>
                     </div>
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
-    <div class="text-center mt-4" style="margin-bottom: 50px;">
+    <div class="text-center mt-4 mb-5">
         <a href="/product" class="btn btn-outline-dark">Lihat Semua Produk</a>
     </div>
 </section>
+
 {% endblock %}
