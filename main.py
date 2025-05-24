@@ -7,11 +7,12 @@ app.secret_key = 'Nic Furniture'
 
 # Konfigurasi database
 DB_CONFIG = {
-    'host': os.getenv('sql12.freesqldatabase.com'),
-    'user': os.getenv('sql12780476'),
-    'password': os.getenv('bS7cqtWJ2q'),
-    'database': os.getenv('sql12780476')
+    'host': os.getenv('DB_HOST'),
+    'user': os.getenv('DB_USER'),
+    'password': os.getenv('DB_PASSWORD'),
+    'database': os.getenv('DB_NAME')
 }
+
 
 # Fungsi koneksi database
 def get_db():
